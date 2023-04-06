@@ -1,0 +1,39 @@
+name: Build ServerCrud
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  workflow_call:
+
+# Stop previously running workflows and re-run
+concurrency:
+  group: ${{ github.workflow }}-${{ github.name }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+  steps:
+  - name: Enable Developer Command Prompt
+    uses: ilammy/msvc-dev-cmd@v1.12.1
+    with:
+      arch: amd64
+
+  - name: Checkout
+    uses: actions/checkout@v2.7.0
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+
+  - name: Configure CMake
+    run: cmake --preset x64-debug
+
+  - name: Build
+    run: cmake --build x64-debug
+
+  - name: Upload build artifacts
+    uses: actions/upload-artifact@v3.1.2
+    with:
+      name: build-output
+      path: ${{ github.workspace }}/build
