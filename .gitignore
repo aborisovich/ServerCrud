@@ -35,5 +35,8 @@
 build/*
 install/*
 
+# External artifacts
+external/boost/*
+
 # Visual Studio temporary files
 .vs/*
