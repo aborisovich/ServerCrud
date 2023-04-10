@@ -6,6 +6,7 @@
  */
 
 #include <ServerCrud/ServerCrud.h>
+#include <boost/asio.hpp>
 
 int main()
 {
