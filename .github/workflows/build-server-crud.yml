@@ -26,6 +26,13 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
+    - name: Cache Boost
+      uses: actions/cache@v3
+      id: boost-cache
+      with:
+        key: ${{ runner.os }}-boost-1.81-x64-debug
+        path: external/boost
+
     - name: Configure CMake
       run: cmake --preset x64-debug
 
