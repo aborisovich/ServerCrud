@@ -5,4 +5,6 @@
 # Author: Andrey Borisovich <andrey@borisovich.com>
 #
 
-target_sources(ServerCrud PRIVATE main.cpp)
+target_sources(ServerCrud PRIVATE
+	main.cpp
+	ArgParser.cpp)
