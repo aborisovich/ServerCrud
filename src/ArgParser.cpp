@@ -6,6 +6,7 @@
  */
 
 #include <ServerCrud/ArgParser.hpp>
+#include <ServerCrud/config.hpp>
 #include <iostream>
 #include <limits>
 
@@ -40,6 +41,12 @@ std::optional<boost::program_options::variables_map> ArgParser::parse_args(int a
     if(parsed_input.count("help"))
     {
         std::cout << all_options << std::endl;
+        return std::nullopt;
+    }
+
+    if(parsed_input.count("version"))
+    {
+        std::cout << PROJECT_VER << std::endl;
         return std::nullopt;
     }
 

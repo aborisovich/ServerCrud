@@ -6,6 +6,6 @@
 #
 
 # Add source to this project's executable.
-target_include_directories(ServerCrud PRIVATE .)
+target_include_directories(ServerCrud PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-# TODO: Add tests and install targets if needed.
+configure_file("${PROJECT_SOURCE_DIR}/cmake/config.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/ServerCrud/config.hpp")
