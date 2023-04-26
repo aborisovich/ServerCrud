@@ -18,14 +18,27 @@ namespace server_crud
 class ArgParser final
 {
 public:
+	/**
+	 * @brief Creates ArgParser instance.
+	*/
 	ArgParser();
-	std::optional<boost::program_options::variables_map> parse_args(int argc, char* argv[]);
+	/**
+	 * @brief Parse program input arguments.
+	 * @param argc Arguments count.
+	 * @param argv Artument array.
+	 * @return Map of parsed arguments with assigned values.
+	*/
+	boost::program_options::variables_map parse_args(int argc, char* argv[]);
 
 private:
 	/**
 	 * @brief Contains a list of supported program arguments.
 	*/
 	boost::program_options::options_description all_options = {"Allowed options"};
+
+	/**
+	 * @brief List of parsed options with corresponding values.
+	*/
 	boost::program_options::variables_map parsed_input;
 };
 
