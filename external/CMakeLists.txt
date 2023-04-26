@@ -6,7 +6,7 @@
 #
 
 # Boost library
-set(BOOST_INCLUDE_LIBRARIES asio system program_options test)
+set(BOOST_INCLUDE_LIBRARIES asio json system program_options)
 set(BOOST_ENABLE_CMAKE ON)
 # Show git clone progress in console
 set(FETCHCONTENT_QUIET FALSE)
@@ -28,5 +28,6 @@ FetchContent_MakeAvailable(Boost)
 
 target_link_libraries(ServerCrud PRIVATE
     Boost::asio
+    Boost::json
     Boost::program_options
     Boost::system)
