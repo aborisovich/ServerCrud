@@ -23,6 +23,8 @@ set_property(TARGET ServerCrud PROPERTY CXX_STANDARD 20)
 # Define supported Windows version - Windows 10
 # https://learn.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?redirectedfrom=MSDN&view=msvc-170
 target_compile_definitions(ServerCrud PRIVATE _WIN32_WINNT=0x0A00)
+# Default encoding for HTTP5 is UTF-8
+target_compile_options(ServerCrud PRIVATE /utf-8)
 
 add_subdirectory(include)
 add_subdirectory(src)
