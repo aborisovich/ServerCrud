@@ -7,6 +7,8 @@
 
 #include <ServerCrud/ArgParser.hpp>
 #include <ServerCrud/TerminationHandler.hpp>
+#include <ServerCrud/ServerCrud.hpp>
+#include <ServerCrud/http/mime_types/JsonRequestHandler.hpp>
 #ifdef WIN32
 #include <ServerCrud/WindowsConsole.hpp>
 #endif
@@ -23,17 +25,21 @@ int main(int argc, char* argv[])
 		throw std::runtime_error("Critical initialization error - failed to register exit handler\n");
 
 	server_crud::ArgParser parser;
+	boost::program_options::variables_map input_args;
 	try
 	{
-		auto map = parser.parse_args(argc, argv);
-		if(map)
-			std::cout << "Starting server at TCP port: " <<
-				map.value()["port"].as<int>() << std::endl;
+		input_args = parser.parse_args(argc, argv);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << "\n";
+		std::exit(-1);
 	}
+
+	server_crud::ServerCrud server = server_crud::ServerCrud(input_args["ip"].as<std::string>(),
+		input_args["port"].as<int>(), 12, std::make_unique<server_crud::http::mime_types::JsonRequestHandler>());
+
+	server.run();
 	
 	return 0;
 }

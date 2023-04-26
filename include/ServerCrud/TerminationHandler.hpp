@@ -6,6 +6,9 @@
  */
 
 #pragma once
+#include <ServerCrud/ServerCrud.hpp>
+#include <boost/exception/exception.hpp>
+#include <boost/exception/enable_error_info.hpp>
 #include <exception>
 #include <iostream>
 #ifdef WIN32
@@ -21,7 +24,10 @@ namespace server_crud
 */
 void on_exit()
 {
-    std::cout << "Terminating ServerCrud instance.\n";
+    if(!ServerCrud::server_instances.empty())
+        std::cout << "Stopping ServerCrud instances.\n";
+    for(auto& instance : ServerCrud::server_instances)
+        instance.get().stop();
 }
 
 /**
