@@ -6,5 +6,12 @@
 #
 
 target_sources(ServerCrud PRIVATE
-	main.cpp
-	ArgParser.cpp)
+	"main.cpp"
+	"ArgParser.cpp"
+	"ServerCrud.cpp"
+	"http/Connection.cpp"
+	"http/RequestParser.cpp"
+	"http/Response.cpp"
+	"http/Status.cpp"
+	"http/mime_types/JsonResponse.cpp"
+	"http/mime_types/JsonRequestHandler.cpp")
